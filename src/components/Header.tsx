@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Divider, IconButton } from '@material-ui/core'
+import { Box, IconButton } from '@material-ui/core'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 import { useTheme } from '@material-ui/core/styles'
@@ -16,19 +16,14 @@ const Header: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         backgroundColor: layout.header.bgcolor,
+        boxSizing: 'border-box',
         padding: '8px 24px',
         color: layout.header.color,
         position: 'fixed',
         top: 0,
         width: '100%',
+        borderBottom: theme => `1px solid ${theme.palette.divider}`,
       }}>
-        <Box>🍞</Box>
-        <Divider sx={{
-          height: 18,
-          margin: '0 10px 0',
-          backgroundColor: layout.header.color,
-        }} orientation="vertical" />
-        <Box>Material Admin</Box>
         <IconButton onClick={() => toggleMode()} sx={{
           color: layout.header.color,
           mx: 1,

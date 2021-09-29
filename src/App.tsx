@@ -1,11 +1,13 @@
 import React from 'react'
-import { BrowserRouter, Switch } from 'react-router-dom'
-import { renderRoutes } from 'react-router-config'
+import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { ThemeProvider as StyProvider } from '@material-ui/styles'
 import { routes } from '/@/router'
+import RouterView from '/@/router/RouterView'
 import { createAppConfig, AppThemeContext } from './hooks/app-config'
 import { CssBaseline } from '@material-ui/core'
+import NotFound from '/@/page/404'
+import { Switch } from 'react-router-dom'
 
 const App: React.FC = () => {
   // global AppConfig
@@ -18,7 +20,7 @@ const App: React.FC = () => {
           <CssBaseline>
             <BrowserRouter>
               <Switch>
-                {renderRoutes(routes)}
+                <RouterView notFound={<NotFound/>} routes={routes} />
               </Switch>
             </BrowserRouter>
           </CssBaseline>

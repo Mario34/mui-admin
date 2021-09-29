@@ -18,11 +18,13 @@ export const AppThemeContext = React.createContext<AppConfigType>({} as AppConfi
 export const modeColor = {
   light: {
     header: {
-      bgcolor: blue[700],
-      color: grey[50],
+      bgcolor: grey[50],
+      color: grey[900],
     },
     side: {
       fixed: true,
+      bgcolor: 'rgb(35, 48, 68)',
+      scrollBarColor: grey[300],
     },
   },
   dark: {
@@ -32,6 +34,8 @@ export const modeColor = {
     },
     side: {
       fixed: true,
+      bgcolor: grey[900],
+      scrollBarColor: grey[50],
     },
   },
 }

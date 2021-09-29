@@ -9,6 +9,8 @@ type CoverTheme = {
     }
     side: {
       fixed: boolean
+      bgcolor: React.CSSProperties['color']
+      scrollBarColor: React.CSSProperties['color']
     }
   }
 }

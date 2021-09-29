@@ -1,17 +1,11 @@
 import { makeStyles } from '@material-ui/styles'
 import { Theme } from '@material-ui/core/styles'
+import { grey } from '@material-ui/core/colors'
 
 export const useStyles = makeStyles<Theme>((theme) => ({
   root: {
-    paddingTop: 8,
-    paddingBottom: 8,
     borderBottom: 'none',
     listStyle: 'none',
-    '&.root': {
-      paddingRight: 8,
-      paddingLeft: 8,
-      borderBottom: `1px solid ${theme.palette.divider}`,
-    },
   },
   title: {
     display: 'flex',
@@ -19,47 +13,37 @@ export const useStyles = makeStyles<Theme>((theme) => ({
     alignItems: 'center',
     width: '100%',
     padding: 4,
-    color: theme.palette.text.primary,
-    borderRadius: 8,
+    color: grey[300],
     fontSize: 16,
-    lineHeight: '24px',
-    transition: 'color 100ms, background-color 100ms',
+    lineHeight: '42px',
+    transition: 'color 60ms, background-color 60ms',
     backgroundColor: 'transparent',
     '&:hover': {
-      color: theme.palette.primary.light,
-      backgroundColor: theme.palette.action.hover,
+      color: theme.palette.common.white,
+      backgroundColor: 'rgba(0, 0, 0, 0.01)',
     },
   },
   titleActive: {
-    backgroundColor: theme.palette.mode === 'dark' ? '#03a9f499' : '#03a9f422',
-    color: theme.palette.primary[theme.palette.mode],
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    color: theme.palette.common.white,
     '&:hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? '#03a9f499' : '#03a9f422',
-      color: theme.palette.primary[theme.palette.mode],
+      color: theme.palette.common.white,
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
     },
   },
   icon: {
     fontSize: 20,
     padding: '2px',
-    color: theme.palette.primary.light,
+    color: grey[400],
     borderRadius: 8,
   },
   arrow: {
     marginLeft: 'auto',
     fontSize: 18,
-    color: theme.palette.primary[theme.palette.mode],
+    color: grey[400],
     transition: 'transform 200ms',
   },
   arrowIsOpen: {
     transform: 'rotate(90deg)',
-  },
-}))
-
-export const useSubStyles = makeStyles<Theme>((theme) => ({
-  group: {
-    color: theme.palette.text.secondary,
-    padding: '8px 0 8px 12px',
-    fontSize: 12,
-    fontWeight: 500,
   },
 }))
