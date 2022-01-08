@@ -18,6 +18,7 @@ export default function SideBar() {
         borderRight: `1px solid ${theme.palette.divider}`,
         backgroundColor: theme.layout.side.bgcolor,
         position: 'fixed',
+        zIndex: theme => theme.zIndex.appBar,
         left: 0,
         top: 0,
         height: '100%',
@@ -27,26 +28,32 @@ export default function SideBar() {
         },
       }}
     >
-      <Box sx={{
-        padding: '20px 12px 12px',
-        color: '#fff',
-        fontSize: '18px',
-        fontWeight: '700',
-        textAlign: 'center',
-      }}>
-        <Box sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
+      <Box
+        sx={{
+          padding: '20px 12px 12px',
+          color: '#fff',
+          fontSize: '18px',
+          fontWeight: '700',
+          textAlign: 'center',
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
           <FlashOn color="primary" />
-            Material Admin
+          Material Admin
         </Box>
       </Box>
       <SimpleBar style={{ maxHeight: '100%', boxSizing: 'border-box' }}>
-        <Box sx={{
-          padding: '0 12px',
-        }}>
+        <Box
+          sx={{
+            padding: '0 12px',
+          }}
+        >
           {
             menuList.map(menu => (
               <MenuItem key={menu.path} {...menu} level={1} />

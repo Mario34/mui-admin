@@ -69,15 +69,16 @@ export const createAppConfig = () => {
    * 主题色配置
   */
   const theme = React.useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode,
-        },
-        layout: modeColor[mode],
-      }),
+    () => createTheme({
+      palette: {
+        mode,
+      },
+      layout: modeColor[mode],
+    }),
     [mode],
   )
 
-  return { theme, setDark, setLight, toggleMode }
+  return {
+    theme, setDark, setLight, toggleMode,
+  }
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  Button, Box, Typography, Card, Grid, Chip,
+  Button, Box, Typography, Card, Grid, Chip, Alert,
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
 } from '@material-ui/core'
 import LayoutHeader from '/@/components/LayoutHeader'
@@ -9,17 +9,17 @@ import type { RouteConfigComponentProps } from '/@/router'
 
 const DataCard: React.FC<{
   title: string
-  value: string | number
+  value: number | string
   tag: string
   tips: string
-  tagColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning'
+  tagColor?: 'error' | 'info' | 'primary' | 'secondary' | 'success' | 'warning'
 }> = (props) => {
   return (
     <Card sx={{ px: 2, pt: 3, pb: 2 }}>
-      <Typography variant="h6" gutterBottom>{props.title}</Typography>
-      <Typography variant="h5" gutterBottom>{props.value}</Typography>
-      <Typography variant="body2" component="div" gutterBottom>
-        {props.tag && <Chip size="small" label={props.tag} color={props.tagColor || 'success'} sx={{ mr: 1 }} />}
+      <Typography gutterBottom variant="h6">{props.title}</Typography>
+      <Typography gutterBottom variant="h5">{props.value}</Typography>
+      <Typography gutterBottom component="div" variant="body2">
+        {props.tag && <Chip color={props.tagColor || 'success'} label={props.tag} size="small" sx={{ mr: 1 }} />}
         {props.tips}
       </Typography>
     </Card>
@@ -33,36 +33,39 @@ function createData(
   carbs: number,
   protein: string,
 ) {
-  return { name, calories, fat, carbs, protein }
+  return {
+    name, calories, fat, carbs, protein,
+  }
 }
 
 const Home: React.FC<RouteConfigComponentProps> = (props) => {
   return (
     <Box>
       <LayoutHeader
-        title={props.route?.extend?.name}
         renderRight={() => (
-          <Button variant="contained">Contained</Button>
+          <Button variant="contained">刷 新</Button>
         )}
+        title={props.route?.extend?.name}
       />
-      <Grid container spacing={3} mb={3}>
+      <Alert severity="success" sx={{ mb: 3 }}>所有的任务都已经完成了!</Alert>
+      <Grid container mb={3} spacing={3}>
         <Grid item lg={4} md={6} xl={3}>
-          <DataCard title="总成交订单额" value="¥615789.48" tag="+28%" tips="相比上周增长" />
+          <DataCard tag="+28%" tips="相比上周增长" title="总成交订单额" value="¥615789.48" />
         </Grid>
         <Grid item lg={4} md={6} xl={3}>
-          <DataCard title="一类总成交订单额" value="¥10889.48" tag="-8%" tagColor="warning" tips="相比上周降低" />
+          <DataCard tag="-8%" tagColor="warning" tips="相比上周降低" title="一类总成交订单额" value="¥10889.48" />
         </Grid>
         <Grid item lg={4} md={6} xl={3}>
-          <DataCard title="一类总成交订单额" value="¥14789.48" tag="+12%" tagColor="secondary" tips="相比上周增长" />
+          <DataCard tag="+12%" tagColor="secondary" tips="相比上周增长" title="一类总成交订单额" value="¥14789.48" />
         </Grid>
         <Grid item lg={4} md={6} xl={3}>
-          <DataCard title="三类总成交订单额" value="¥13389.48" tag="+27%" tips="相比上周增长" />
+          <DataCard tag="+27%" tips="相比上周增长" title="三类总成交订单额" value="¥13389.48" />
         </Grid>
       </Grid>
-      <Grid container spacing={3} mb={3}>
+      <Grid container mb={3} spacing={3}>
         <Grid item md={12} xl={6}>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table aria-label="simple table" sx={{ minWidth: 650 }}>
               <TableHead>
                 <TableRow>
                   <TableCell>各区域订单数据</TableCell>
@@ -100,7 +103,7 @@ const Home: React.FC<RouteConfigComponentProps> = (props) => {
         </Grid>
         <Grid item md={12} xl={6}>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table aria-label="simple table" sx={{ minWidth: 650 }}>
               <TableHead>
                 <TableRow>
                   <TableCell>Dessert (100g serving)</TableCell>
@@ -138,7 +141,7 @@ const Home: React.FC<RouteConfigComponentProps> = (props) => {
         </Grid>
         <Grid item md={12} xl={12}>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table aria-label="simple table" sx={{ minWidth: 650 }}>
               <TableHead>
                 <TableRow>
                   <TableCell>各区域订单数据</TableCell>

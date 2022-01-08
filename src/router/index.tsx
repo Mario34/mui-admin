@@ -1,24 +1,25 @@
-import React from 'react'
+import type React from 'react'
 import loadable from '@loadable/component'
 import Layout from '/@/components/Layout'
 import { AuthWrapper } from './Wrapper'
 import Fallback from '/@/components/Fallback'
-import SvgIcon from '@material-ui/core/SvgIcon'
+import type SvgIcon from '@material-ui/core/SvgIcon'
 import {
   Inbox as InboxIcon,
   Apps as AppsIcon,
   Code as CodeIcon,
   AccountCircleOutlined as AccountCircleOutlinedIcon,
   ExitToAppOutlined as ExitToAppOutlinedIcon,
+  AccountBalanceWalletOutlined as AccountBalanceWalletOutlinedIcon,
 } from '@material-ui/icons'
 
 import type { RouteComponentProps } from 'react-router'
 
 type SvgIconComponent = typeof SvgIcon
 
-export interface AuthWrapperType {
-  (props: React.PropsWithChildren<{ route: CustomRouteConfig }>): JSX.Element
-}
+export type AuthWrapperType = (
+  props: React.PropsWithChildren<{route: CustomRouteConfig}>
+) => JSX.Element
 
 export interface BaseRouteExtendType {
   /** 在侧边栏中显示 */
@@ -31,7 +32,7 @@ export interface BaseRouteExtendType {
 
 /** 扩展字段（用于配制侧边栏、权限） */
 export interface RouteExtendType extends Partial<BaseRouteExtendType> {
-  //TODO: 根据业务需求进行扩展
+  // TODO: 根据业务需求进行扩展
   authCode: number
 }
 
@@ -48,7 +49,7 @@ export interface CustomRouteConfig {
   redirect?: string
   routes?: CustomRouteConfig[]
   extend?: Partial<RouteExtendType>
-  component?: React.ComponentType<RouteConfigComponentProps<any>> | React.ComponentType | undefined
+  component?: React.ComponentType | React.ComponentType<RouteConfigComponentProps<any>> | undefined
   wrappers?: AuthWrapperType
   render?: ((props: RouteConfigComponentProps<any>) => React.ReactNode) | undefined
   [propName: string]: any
@@ -63,37 +64,21 @@ export const layoutRoutes: CustomRouteConfig[] = [
   {
     path: '/home',
     exact: true,
-    component: lazyLoad(() => import('/@/page/home')),
+    component: lazyLoad(async () => import('/@/page/home')),
     extend: {
       icon: AppsIcon,
       name: '数据概览',
     },
   },
   {
-    path: '/module',
+    path: '/order/list',
+    exact: true,
+    wrappers: AuthWrapper,
+    component: lazyLoad(async () => import('/@/page/order')),
     extend: {
-      icon: InboxIcon,
+      icon: AccountBalanceWalletOutlinedIcon,
       name: '订单管理',
     },
-    routes: [
-      {
-        path: '/module/a',
-        exact: true,
-        wrappers: AuthWrapper,
-        component: lazyLoad(() => import('/@/page/home')),
-        extend: {
-          name: '所有订单',
-        },
-      },
-      {
-        path: '/module/page-home',
-        exact: true,
-        component: lazyLoad(() => import('/@/page/home')),
-        extend: {
-          name: '售后订单',
-        },
-      },
-    ],
   },
   {
     path: '/module-b',
@@ -105,7 +90,7 @@ export const layoutRoutes: CustomRouteConfig[] = [
       {
         path: '/module-b/page-home',
         exact: true,
-        component: lazyLoad(() => import('/@/page/home')),
+        component: lazyLoad(async () => import('/@/page/home')),
         extend: {
           name: '快速开始',
         },
@@ -113,7 +98,7 @@ export const layoutRoutes: CustomRouteConfig[] = [
       {
         path: '/module-b/page-home-',
         exact: true,
-        component: lazyLoad(() => import('/@/page/home')),
+        component: lazyLoad(async () => import('/@/page/home')),
         extend: {
           name: '快速开始',
         },
@@ -130,7 +115,7 @@ export const layoutRoutes: CustomRouteConfig[] = [
       {
         path: '/roles/page-home',
         exact: true,
-        component: lazyLoad(() => import('/@/page/home')),
+        component: lazyLoad(async () => import('/@/page/home')),
         extend: {
           icon: AccountCircleOutlinedIcon,
           name: '角色管理',
@@ -158,7 +143,7 @@ export const routes: CustomRouteConfig[] = [
   {
     path: '/login',
     exact: true,
-    component: lazyLoad(() => import('/@/page/login')),
+    component: lazyLoad(async () => import('/@/page/login')),
     extend: {
       menu: false,
       name: '登录/注册',
@@ -172,7 +157,7 @@ export const routes: CustomRouteConfig[] = [
   },
   {
     path: '*',
-    component: lazyLoad(() => import('/@/page/404')),
+    component: lazyLoad(async () => import('/@/page/404')),
     extend: {
       menu: false,
     },

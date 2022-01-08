@@ -11,26 +11,32 @@ const Header: React.FC = () => {
 
   return (
     <Box component="header" sx={{ height: 52 }}>
-      <Box sx={{
-        height: 52,
-        display: 'flex',
-        alignItems: 'center',
-        backgroundColor: layout.header.bgcolor,
-        boxSizing: 'border-box',
-        padding: '8px 24px',
-        color: layout.header.color,
-        position: 'fixed',
-        top: 0,
-        width: '100%',
-        borderBottom: theme => `1px solid ${theme.palette.divider}`,
-      }}>
-        <IconButton onClick={() => toggleMode()} sx={{
+      <Box
+        sx={{
+          height: 52,
+          display: 'flex',
+          alignItems: 'center',
+          backgroundColor: layout.header.bgcolor,
+          boxSizing: 'border-box',
+          padding: '8px 24px',
           color: layout.header.color,
-          mx: 1,
-        }}>
+          position: 'fixed',
+          top: 0,
+          width: '100%',
+          zIndex: theme => theme.zIndex.appBar,
+          borderBottom: theme => `1px solid ${theme.palette.divider}`,
+        }}
+      >
+        <IconButton
+          sx={{
+            color: layout.header.color,
+            mx: 1,
+          }}
+          onClick={() => toggleMode()}
+        >
           {palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
-        current mode is: <Box mx={1} fontWeight="bold">{String(palette.mode).toUpperCase()}</Box>
+        current mode is: <Box fontWeight="bold" mx={1}>{String(palette.mode).toUpperCase()}</Box>
       </Box>
     </Box>
   )
